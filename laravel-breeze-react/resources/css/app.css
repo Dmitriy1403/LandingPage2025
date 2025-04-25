@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+    :root {
+      --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --font-poppins: Poppins, sans-serif;
+    }
+
+    /* Добавляем кастомный стиль для градиентного эффекта */
+.tab-gradient {
+  position: relative;
+  overflow: hidden;
+}
+
+.tab-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: linear-gradient(65deg, var(--gradient-from), var(--gradient-to));
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.tab-gradient:hover::before {
+  opacity: 1;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+  }
