@@ -5,10 +5,10 @@ import { Link } from '@inertiajs/react';
 
 export default function Sidebar() {
   return (
-    <nav className="w-64 h-screen bg-gradient-to-br from-white to-gray-50 border-r shadow-md px-6 py-8">
+    <nav className="w-64  bg-gradient-to-br from-white to-gray-50 border-r shadow-md px-6 py-8">
       <div className="mb-10">
         <h3 className="mb-4 text-xs font-bold text-gray-600 uppercase tracking-wide">
-          Section 3
+          Manage Section
         </h3>
         <ul className="space-y-4">
           <li className="flex items-center space-x-3 p-2 rounded-md hover:bg-indigo-50 transition ease-in-out transform hover:scale-105">
@@ -60,7 +60,7 @@ export default function Sidebar() {
         </ul>
       </div>
 
-      <div>
+      {/* <div>
         <h3 className="mb-4 text-xs font-bold text-gray-600 uppercase tracking-wide">
           Section 4
         </h3>
@@ -84,7 +84,7 @@ export default function Sidebar() {
             </a>
           </li>
         </ul>
-      </div>
+      </div> */}
     </nav>
   );
 }

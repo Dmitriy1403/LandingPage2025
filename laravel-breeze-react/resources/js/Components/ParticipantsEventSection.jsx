@@ -96,7 +96,7 @@ export default function ParticipantEvent({ participants_event, ticket_sum, total
   
   return (
     <Container className="mt-8 ">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+        <div className="grid grid-cols-11 sm:grid-cols-2 gap-6 mt-8">
 
        
 
@@ -164,16 +164,14 @@ export default function ParticipantEvent({ participants_event, ticket_sum, total
         Participants event
       </h1>
 
-  <div className="flex items-center ">
-              <Search className="w-5 h-5 mr-2" />
-              <input
-                type="text"
-                className="border border-gray-300 rounded w-64 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-400"
-                placeholder="Поиск по имени, группе,телефону,email"
-                // value={searchTerm}
-                // onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
+      <div className="container mx-auto flex items-center justify-center  mt-10 mb-10">
+  <Search className="w-5 h-5 mr-2 text-gray-500" />
+  <input
+    type="text"
+    className="border border-gray-300 rounded w-64 py-2 focus:outline-none focus:ring-1 focus:ring-blue-400"
+    placeholder="Поиск по имени, группе, телефону, email"
+  />
+</div>
       
       
            <div className="flex justify-center ">

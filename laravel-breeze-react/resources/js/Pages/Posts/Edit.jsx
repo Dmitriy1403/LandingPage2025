@@ -84,7 +84,7 @@ export default function Edit() {
           },
         }
       );
-      // После успешного обновления — полный редирект
+      
       window.location.href = route('posts.index');
     } catch (err) {
       if (err.response?.status === 422) {

@@ -106,7 +106,7 @@ Logout
 
 </div>
 
-      <div className="container mx-auto px-6 py-8 max-w-3xl">
+      <div className="container mx-auto px-6 py-8 max-w-3xl ">
         <h1 className="text-4xl font-extrabold mb-6">{post.title}</h1>
 
         <div className="mt-2 mb-8 flex items-center text-xl text-gray-500">
@@ -120,7 +120,7 @@ Logout
 
         <ImageSlider images={post.images} />
 
-        <article className="prose prose-lg prose-gray mb-10">
+        <article className="prose prose-lg prose-gray mb-10 text-justify">
           <div dangerouslySetInnerHTML={{ __html: post.description || '' }} />
         </article>
 

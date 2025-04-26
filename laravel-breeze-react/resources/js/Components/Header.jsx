@@ -32,11 +32,11 @@ export default function Header({onScrollToSection}) {
 
   return (
     <header className="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md transition-all">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-4  flex items-center justify-between h-20">
         {/* Logo */}
 
         <Link href="/" className="flex items-center">
-          <img src="/img/logo3.png" alt="Logo" className="w-28" />
+          <img src="/img/logo3.png" alt="Logo" className="w-48" />
         </Link>
 
        
