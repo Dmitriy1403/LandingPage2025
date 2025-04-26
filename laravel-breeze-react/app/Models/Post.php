@@ -26,6 +26,16 @@ class Post extends Model
         return $this->belongsToMany(Category::class);
     }
 
+
+    public function likers(){
+        return $this->belongsToMany(
+            User::class,
+            'post_user_likes',
+            'post_id',
+            'user_id',
+        )->withTimestamps();
+    }
+
     // Связь с комментариями
     public function comments()
     {

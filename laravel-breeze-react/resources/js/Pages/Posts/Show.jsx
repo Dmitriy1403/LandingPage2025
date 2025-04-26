@@ -7,8 +7,16 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FiClock } from "react-icons/fi";     
 
+import { FiHeart } from 'react-icons/fi';
+import { FaHeart } from 'react-icons/fa';
+
 export default function Show() {
-  const { post, auth, hasCommented,created_at } = usePage().props;
+  const { post, auth, hasCommented,created_at,isLiked,likesCount } = usePage().props;
+
+
+  const [liked, setLiked] = useState(isLiked);
+  const [count, setCount] = useState(likesCount);
+  const [toggling, setToggling] = useState(false);
 
   const [newComment, setNewComment] = useState('');
   const [errors, setErrors] = useState({});
@@ -60,6 +68,27 @@ export default function Show() {
       }, [hasCommented, post.id]);
 
 
+      
+  const toggleLike = async () => {
+    if (!auth.user) {
+      // например, редирект на логин
+      return Inertia.visit('/login');
+    }
+    setToggling(true);
+    try {
+      const { data } = await axios.post(route('posts.like', post.id));
+      // ожидаем { action: 'liked'|'unliked', likes_count: number }
+      setLiked(data.action === 'liked');
+      setCount(data.likes_count);
+    } catch (e) {
+      console.error(e);
+      // можно показать уведомление
+    } finally {
+      setToggling(false);
+    }
+  };
+
+
   return (
 
 
@@ -106,8 +135,10 @@ Logout
 
 </div>
 
-      <div className="container mx-auto px-6 py-8 max-w-3xl ">
+      <div className="container mx-auto px-6 mt-8 py-8 max-w-3xl">
         <h1 className="text-4xl font-extrabold mb-6">{post.title}</h1>
+
+        
 
         <div className="mt-2 mb-8 flex items-center text-xl text-gray-500">
         <FiClock className="mr-1" />
@@ -120,11 +151,22 @@ Logout
 
         <ImageSlider images={post.images} />
 
-        <article className="prose prose-lg prose-gray mb-10 text-justify">
-          <div dangerouslySetInnerHTML={{ __html: post.description || '' }} />
-        </article>
+        <article className="prose prose-lg prose-gray text-justify mb-4">
+  <div dangerouslySetInnerHTML={{ __html: post.description || '' }} />
+</article>
 
-     
+{/* контейнер, чтобы кнопка была справа */}
+<div className="flex justify-end mb-10 ">
+  <button
+    onClick={toggleLike}
+    disabled={toggling}
+    className="flex items-center space-x-1 text-2xl focus:outline-none"
+  >
+    {liked ? <FaHeart className="text-red-500" /> : <FiHeart />}
+    <span>{count}</span>
+  </button>
+</div>
+        
 
         <section className="space-y-8">
           <h2 className="text-2xl font-semibold border-b pb-2 mb-4">Комментарии</h2>

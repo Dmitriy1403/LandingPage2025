@@ -43,6 +43,9 @@ Route::resource('posts', PostController::class)
     ->middleware('auth')
     ->name('posts.comments.store');
 
+    Route::middleware('auth')->post('/posts/{post}/like', [PostController::class, 'toggleLike'])
+     ->name('posts.like');
+
 
 Route::get('/login', function () {
     return Inertia::render('Welcome', [

@@ -113,9 +113,26 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $post->load(['images', 'comments' => fn($q) => $q->where('is_approved', true)->with('user')]);
+    $post->load([
+        'images',
+         'comments' => fn($q) => $q->where('is_approved', true)->with('user')]);
+
     $hasCommented = $post->comments()->where('user_id', auth()->id())->exists();
-    return Inertia::render('Posts/Show', compact('post', 'hasCommented'));
+
+    $post->loadCount('likers');
+
+    $isLiked = auth()->check()
+        ? $post->likers()->where('user_id', auth()->id())->exists()
+        : false;
+
+
+   
+    return Inertia::render('Posts/Show', [
+        'post'         => $post,
+        'hasCommented' => $hasCommented,
+        'likesCount'   => $post->likers_count,
+        'isLiked'      => $isLiked,
+    ]);
     }
 
     /**
@@ -194,4 +211,18 @@ class PostController extends Controller
         ->route('posts.index')
         ->with('success', 'Пост успешно обновлен.');
 }
+
+
+// в PostController
+public function toggleLike(Post $post)
+{
+    $user = auth()->user();
+    $result = $post->likers()->toggle($user->id);
+    $action = count($result['attached']) ? 'liked' : 'unliked';
+    return response()->json([
+        'action'      => $action,
+        'likes_count' => $post->likers()->count(),
+    ]);
+} 
+
 }
