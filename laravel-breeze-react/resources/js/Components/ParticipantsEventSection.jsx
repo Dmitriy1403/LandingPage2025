@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Table, Container, Button } from "react-bootstrap";
 import { usePage, useForm } from '@inertiajs/react';
 import { FaUsers, FaTicketAlt } from "react-icons/fa";
@@ -13,13 +13,50 @@ import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 
 import Sidebar from "./Sidebar";
-export default function ParticipantEvent({ participants_event, ticket_sum, totalParticipants,ticketSales}) {
+export default function ParticipantEvent({ participants_event, ticket_sum, totalParticipants,ticketSales,postLikeStats }) {
   // Инициализируем состояние списком участников из participants_event.data
   
+
+
+  const allParticipants = participants_event.data || [];
+
   const [participants, setParticipants] = useState(participants_event.data || []);
   
  
   const [editRegisterId, setEditRegisterId] = useState(null);
+
+
+  const [searchItem, setSearchItem] = useState('')
+
+  const [filteredUsers, setFilteredUsers] = useState(allParticipants
+
+  );
+
+  useEffect(() => {
+    const term = searchItem.toLowerCase();
+    const filtered = allParticipants.filter(p =>
+      p.groupName?.toLowerCase().includes(term) ||
+      p.email?.toLowerCase().includes(term) ||
+      p.contactPerson?.toLowerCase().includes(term) ||
+      p.phone?.toLowerCase().includes(term)
+    );
+    setFilteredUsers(filtered);
+  }, [searchItem, allParticipants]);
+
+
+  const handleInputChange = (e) => { 
+    const searchTerm = e.target.value;
+    setSearchItem(searchTerm)
+
+    const filteredItems = participants_event.filter((participant) =>
+    participant.groupName||participant.email||participant.contactPerson||participant.phone.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setFilteredUsers(filteredItems);
+  }
+
+
+
 
   const {
     data: editRegisterData,
@@ -34,11 +71,6 @@ export default function ParticipantEvent({ participants_event, ticket_sum, total
     contactPerson:'',
     email:'',
     phone:'',
-   
-
-
-
-
   });
 
   const handleEditRegistration = (registration)=>{
@@ -61,7 +93,7 @@ export default function ParticipantEvent({ participants_event, ticket_sum, total
       onSuccess: () => {
         setEditRegisterId(null);
         resetEditRegisterForm();
-        Inertia.reload();
+      Inertia.reload();
 
         
       },
@@ -158,19 +190,42 @@ export default function ParticipantEvent({ participants_event, ticket_sum, total
         </Table>
       </div>
       
-    
+      <div className="mt-8 bg-white shadow sm:rounded-lg p-6">
+
+                <div className="bg-amber-600">
+                <h2 className="text-lg font-bold mb-4">Post Likes Statistics</h2>
+                </div>
+                {postLikeStats.length > 0 ? (
+                    <ul>
+                        {postLikeStats.map(post => (
+                            <li
+                                key={post.id}
+                                className="flex justify-between py-2 border-b last:border-none"
+                            >
+                                <span className="font-medium">{post.title}</span>
+                                <span className="text-gray-600">{post.likers_count} likes</span>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p className="text-gray-500">Пока нет лайков ни на одном посте.</p>
+                )}
+            </div>
       
       <h1 className="flex justify-center mt-8 mb-16 text-4xl font-extrabold leading-none tracking-tight text-black-900 md:text-5xl lg:text-6xl dark:text">
         Participants event
       </h1>
 
       <div className="container mx-auto flex items-center justify-center  mt-10 mb-10">
-  <Search className="w-5 h-5 mr-2 text-gray-500" />
-  <input
-    type="text"
-    className="border border-gray-300 rounded w-64 py-2 focus:outline-none focus:ring-1 focus:ring-blue-400"
-    placeholder="Поиск по имени, группе, телефону, email"
-  />
+      <Search className="w-5 h-5 mr-2 text-gray-500" />
+        <input
+          type="text"
+          value={searchItem}
+          onChange={e => setSearchItem(e.target.value)}
+          className="border rounded w-64 py-2 px-3"
+          placeholder="Поиск по группе, email, контакту, телефону"
+        />
+ 
 </div>
       
       
@@ -192,8 +247,8 @@ export default function ParticipantEvent({ participants_event, ticket_sum, total
       </tr>
     </thead>
     <tbody>
-      {participants?.length > 0 ? (
-        participants.map((participant, index) => {
+      {filteredUsers?.length > 0 ? (
+        filteredUsers.map((participant, index) => {
           // Проверяем, редактируем ли мы сейчас этого участника
           if (editRegisterId === participant.id) {
             // Редактируемая строка

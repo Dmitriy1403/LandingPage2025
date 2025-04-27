@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Register;
 use App\Models\Ticket;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule; 
 use Validator;
@@ -36,9 +37,10 @@ class RegisterController extends Controller
         });
 
       
-        //  dd($ticketSales);
-
-        
+    
+        $postLikeStats = Post::withCount('likers')
+        ->orderByDesc('likers_count')
+        ->get(['id', 'title', 'likers_count']);
 
 
         $participants_event = Register::with('ticket')->paginate(10);
@@ -75,6 +77,7 @@ class RegisterController extends Controller
             'totalParticipants'=>$totalParticipants,
             'ticketSales' => $ticketSales->toArray(),
 
+            'postLikeStats'=>$postLikeStats,            
             'auth' => ['user' => auth()->user()]]);
         
     }

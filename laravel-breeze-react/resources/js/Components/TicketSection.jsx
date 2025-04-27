@@ -39,7 +39,7 @@ const TicketPricing = ({ tickets_event }) => {
               ))}
             </ul>
             <a
-              href="#"
+              href="/registration"
               className="mt-8 block rounded-md bg-indigo-500 text-white px-3.5 py-2.5 text-center text-sm font-semibold shadow-sm hover:bg-indigo-400"
             >
               Get Ticket

@@ -37,7 +37,7 @@ class EventDayController extends Controller
             'title' => 'required|string|max:255',
             // 'speaker_name' => 'required|string|max:255',
             'start_time' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|max:2048',
             'end_time' => 'required',
             'location' => 'required|string|max:255',
             'speakers' => 'array', 

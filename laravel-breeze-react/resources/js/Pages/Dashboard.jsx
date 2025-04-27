@@ -12,7 +12,7 @@ import Sidebar from '@/Components/Sidebar';
 import Events from './Event';
 
 export default function Dashboard() {
-    const { participants_event,ticket_sum,totalParticipants,ticketSales} = usePage().props;
+    const { participants_event,ticket_sum,totalParticipants,ticketSales,postLikeStats} = usePage().props;
 
    
     return (
@@ -45,7 +45,7 @@ export default function Dashboard() {
             </div>
             <div className="py-12 max-w-7xl mx-auto px-6">
             
-            <ParticipantEvent participants_event={participants_event} ticket_sum ={ticket_sum} totalParticipants = {totalParticipants}  ticketSales={ticketSales} />
+            <ParticipantEvent participants_event={participants_event} ticket_sum ={ticket_sum} totalParticipants = {totalParticipants}  ticketSales={ticketSales} postLikeStats={postLikeStats} />
             </div>
 
 

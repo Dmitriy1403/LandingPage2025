@@ -39,7 +39,6 @@ class PostController extends Controller
        
         //  dd($request->file('background_image'));
 
-        // Валидация запроса, включая изображение
         $validated = $request->validate([
             'title'         => 'required|string|max:255',
             'description'   => 'required|string',
@@ -58,11 +57,11 @@ class PostController extends Controller
 
         $bgFile = $request->file('background_image');
 
-        // Извлекаем файлы
+    
         $images = $request->file('images');
 
         if ($bgFile) {
-            // сохранит на диске `public` → storage/app/public/posts/backgrounds/...
+          
             $dest     = public_path('img/posts');
             $fileName = uniqid().'_'.$bgFile->getClientOriginalName();
             $bgFile->move($dest, $fileName);
@@ -89,11 +88,11 @@ class PostController extends Controller
         if ($images) {
             foreach ($images as $image) {
                 $destinationPath = public_path('img/posts');
-                // Генерируем уникальное имя файла
+              
                 $filename = time() . '_' . $image->getClientOriginalName();
-                // Перемещаем файл
+               
                 $image->move($destinationPath, $filename);
-                // Сохраняем относительный путь в базе
+             
                 $path = 'img/posts/' . $filename;
                 
                 PostImage::create([
@@ -224,5 +223,7 @@ public function toggleLike(Post $post)
         'likes_count' => $post->likers()->count(),
     ]);
 } 
+
+
 
 }

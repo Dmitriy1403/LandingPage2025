@@ -156,7 +156,7 @@ Logout
 </article>
 
 {/* контейнер, чтобы кнопка была справа */}
-<div className="flex justify-end mb-10 ">
+<div className="flex justify-start mb-10 ">
   <button
     onClick={toggleLike}
     disabled={toggling}

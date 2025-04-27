@@ -41,4 +41,6 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class)->where('is_approved', true);
     }
+
+    
 }
