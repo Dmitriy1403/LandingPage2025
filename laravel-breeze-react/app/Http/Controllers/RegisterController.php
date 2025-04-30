@@ -54,19 +54,12 @@ class RegisterController extends Controller
             return $participant->participantsNumber * $participant->ticket->price;
         });
 
-       
-
-
-      
-
         
 
         \Log::info('Ticket sum:', ['ticket_sum' => $ticket_sum]);
         \Log::info('Total participants:', ['totalParticipants' => $totalParticipants]);
 
-
-       
-        
+           
         if (!auth()->check()) {
             return redirect('/login'); 
         }

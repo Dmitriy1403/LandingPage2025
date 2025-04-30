@@ -3,8 +3,8 @@ import { useForm, usePage, Link } from "@inertiajs/react";
 
 export default function Registration() {
   // Получаем flash-сообщение (если есть) из page.props
-  const { flash,tickets_event } = usePage().props;
-  console.log("Tickets from server:", tickets_event); 
+  const { flash, tickets_event } = usePage().props;
+  console.log("Tickets from server:", tickets_event);
 
   // Инициализируем форму с начальными значениями
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -46,7 +46,7 @@ export default function Registration() {
         {/* Форма */}
         <form onSubmit={handleSubmit} className="space-y-5">
 
-        <div>
+          <div>
             <label htmlFor="ticket_id" className="block text-gray-700 font-medium">
               Select Ticket
             </label>
@@ -60,15 +60,15 @@ export default function Registration() {
             >
               <option value="">Choose a ticket</option>
               {tickets_event && tickets_event.length > 0 ? (
-    tickets_event.map((ticket) => (
-      <option key={ticket.id} value={ticket.id}>
-        {ticket.title} - ${ticket.price}
-      </option>
-    ))
-  ) : (
-    <option disabled>No tickets available</option>
-  )}
-</select>
+                tickets_event.map((ticket) => (
+                  <option key={ticket.id} value={ticket.id}>
+                    {ticket.title} - ${ticket.price}
+                  </option>
+                ))
+              ) : (
+                <option disabled>No tickets available</option>
+              )}
+            </select>
           </div>
 
 

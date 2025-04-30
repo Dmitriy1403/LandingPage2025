@@ -4,7 +4,8 @@ import { Head, Link, usePage } from '@inertiajs/react';
 import axios from 'axios';
 import ImageSlider from '@/Components/ImageSlider';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+
 import { FiClock } from "react-icons/fi";     
 
 import { FiHeart } from 'react-icons/fi';

@@ -38,7 +38,7 @@ class CommentController extends Controller
             ->route('posts.show', $post->id)
             ->with('success', 'Ваш комментарий отправлен на модерацию.');
 
-        // return back()->with('success', 'Ваш комментарий отправлен на модерацию.');
+    
         
       
     }

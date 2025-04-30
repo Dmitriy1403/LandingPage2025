@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from '@inertiajs/react';
+import React, { useState,useEffect } from 'react';
+import { Link,usePage  } from '@inertiajs/react';
 import { Inertia } from '@inertiajs/inertia';
 
 const Create = () => {
@@ -14,17 +14,51 @@ const Create = () => {
     image: ''
   });
 
+
+  const { errors } = usePage().props;
+  const [imageFile, setImageFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+
+
+  useEffect(() => {
+    if (!imageFile) {
+      setPreviewUrl(null);
+      return;
+    }
+    const objectUrl = URL.createObjectURL(imageFile);
+    setPreviewUrl(objectUrl);
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [imageFile]);
+
   const handleChange = (e) => {
-    setValues((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
+    const { name, value, files, type } = e.target;
+    if (type === 'file') {
+      setImageFile(files[0] || null);
+    } else {
+      setValues((prev) => ({
+        ...prev,
+        [name]: value
+      }));
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    Inertia.post('/speakers', values);
+    const formData = new FormData();
+    Object.entries(values).forEach(([key, val]) => {
+      formData.append(key, val);
+    });
+    if (imageFile) {
+      formData.append('image', imageFile);
+    }
+    Inertia.post('/speakers', formData, {
+      preserveScroll: true,
+      onError: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
+    });
   };
+
+
+
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded shadow mt-8">
@@ -123,17 +157,26 @@ const Create = () => {
           />
         </div>
 
+       
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Изображение (URL или имя файла)
+            Изображение
           </label>
           <input
-            type="text"
+            type="file"
             name="image"
-            value={values.image}
+            accept="image/*"
             onChange={handleChange}
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
           />
+          {errors.image && (
+            <p className="mt-1 text-sm text-red-600">{errors.image}</p>
+          )}
+          {previewUrl && (
+            <div className="mt-2">
+              <img src={previewUrl} alt="Preview" className="h-32 w-auto rounded" />
+            </div>
+          )}
         </div>
 
         <div className="flex items-center space-x-4 mt-6">

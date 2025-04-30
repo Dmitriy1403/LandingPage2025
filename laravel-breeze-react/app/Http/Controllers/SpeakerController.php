@@ -41,7 +41,7 @@ class SpeakerController extends Controller
             'instagram' => 'nullable|url',
             'twitter'   => 'nullable|url',
             'linkedin'  => 'nullable|url',
-            'image'     => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048', 
+            'image'     => 'nullable|image|max:3048', 
         ]);
 
         
@@ -89,7 +89,7 @@ class SpeakerController extends Controller
             'twitter'   => 'nullable|url',
             'linkedin'  => 'nullable|url',
             'facebook' => 'nullable|url',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120', // до 5MB
+            'image' => 'nullable|image|max:3120', // до 5MB
         ]);
 
 

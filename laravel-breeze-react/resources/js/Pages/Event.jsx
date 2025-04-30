@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { usePage, useForm } from '@inertiajs/react';
+import {Link, usePage, useForm } from '@inertiajs/react';
 import axios from 'axios';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
@@ -607,8 +607,17 @@ export default function ScheduleEditor() {
         <p className="text-gray-500 text-center">Нет доступных дней</p>
       )}
 
+<button  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 mt-8 rounded">
+      <Link
+            href="/dashboard"
+            
+          >
+            Back Dashboard
+          </Link>
+          </button>
       
     </section>
+
 
       
 

@@ -57,10 +57,10 @@ class HomeController extends Controller
             'about_section'    => $about_section,
             'event_days' => $event_days,
             
-            // 'participants_event'=>$participants_event,
+          
             'speakers_event' => $speakers_event,
             'tickets_event'=>$tickets_event,
-            // dd($tickets_event),
+           
 
             'auth' => ['user' => auth()->user() ?? null] // ✅ Передаем null, если пользователь не вошел
 

@@ -4,8 +4,11 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
+import { usePage } from '@inertiajs/react';
+
 
 export default function Register() {
+    const { flash } = usePage().props;
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
@@ -23,6 +26,14 @@ export default function Register() {
 
     return (
         <GuestLayout>
+
+{flash.success && (
+        <div className="bg-green-100 p-4 rounded text-green-800 mb-4">
+          {flash.success}
+        </div>
+      )}
+
+
             <Head title="Register" />
 
             <form onSubmit={submit}>
