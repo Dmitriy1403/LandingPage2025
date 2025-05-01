@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Testing\AssertableInertia as Assert;
 use App\Models\User;
 use App\Models\Post;
@@ -202,4 +203,53 @@ class PostControllerTest extends TestCase
             'user_id' => $user->id,
         ]);
     }
+
+
+    public function guests_and_non_admins_cannot_access_admin_crud_routes()
+    {
+        // guest cannot view create
+        $this->get(route('posts.create'))->assertRedirect('/login');
+
+        // non-admin user
+        $user = User::factory()->create(['is_admin' => false]);
+        $this->actingAs($user)
+             ->get(route('posts.create'))
+             ->assertStatus(403);
+        $this->actingAs($user)
+             ->post(route('posts.store'), [])
+             ->assertStatus(403);
+    }
+
+
+
+    public function admin_can_create_post_with_images()
+    {
+        Storage::fake('public');
+        $admin = User::factory()->create(['role' => 'admin']);
+        $this->actingAs($admin);
+
+        $bg = UploadedFile::fake()->image('bg.jpg');
+        $imgs = [ UploadedFile::fake()->image('one.jpg'), UploadedFile::fake()->image('two.jpg') ];
+
+        $response = $this->post(route('posts.store'), [
+            'title'            => 'My Title',
+            'description'      => 'Some description',
+            'background_image' => $bg,
+            'is_published'     => true,
+            'published_at'     => now()->toDateString(),
+            'images'           => $imgs,
+        ]);
+
+        $response->assertRedirect(route('posts.index'));
+        $this->assertDatabaseHas('posts', [
+            'title'        => 'My Title',
+            'is_published' => true,
+        ]);
+
+        $post = Post::first();
+        $this->assertCount(2, $post->images);
+    }
+
+
+
 }

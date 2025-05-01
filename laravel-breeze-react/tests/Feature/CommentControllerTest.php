@@ -105,39 +105,40 @@ class CommentControllerTest extends TestCase
 
     /** @test */
     public function admin_can_view_index_and_update_and_destroy_comments()
-    {
-        // предположим, что ваш AdminMiddleware проверяет $user->is_admin
-        $admin = User::factory()->create(['is_admin' => true]);
+{
+    $admin = User::factory()->create(['role' => 'admin']);
+    $this->actingAs($admin);
 
-        // в админку попадаем успешно
-        $this->actingAs($admin);
+    // создаём ровно два комментария
+    $comments = Comment::factory()->count(2)->create();
 
-        // готовим пару комментариев
-        $comments = Comment::factory()->count(2)->create();
+    // INDEX
+    $response = $this->get(route('comments.index'));
+    $response->assertStatus(200)
+             ->assertInertia(fn(Assert $page) =>
+                 $page->component('Comments/Index')
+                      ->has('comments') // просто проверяем, что проп 'comments' пришёл
+                      // а здесь убеждаемся, что первые два комментария — это наши
+                      ->where('comments.0.id', $comments[0]->id)
+                      ->where('comments.1.id', $comments[1]->id)
+             );
 
-        // INDEX
-        $response = $this->get(route('comments.index'));
-        $response->assertStatus(200)
-            ->assertInertia(fn(Assert $page) =>
-                $page->component('Comments/Index')
-                     ->has('comments', 2)
-            );
+    // UPDATE
+    $first = $comments->first();
+    $response = $this->patch(route('comments.update', $first), [
+        'is_approved' => true,
+    ]);
+    $response
+        ->assertRedirect()
+        ->assertSessionHas('success', 'Статус комментария обновлён.');
+    $this->assertTrue($first->fresh()->is_approved);
 
-        // UPDATE (утверждаем первый)
-        $first = $comments->first();
-        $response = $this->patch(route('comments.update', $first), [
-            'is_approved' => true,
-        ]);
-        $response
-            ->assertRedirect() // back()
-            ->assertSessionHas('success', 'Статус комментария обновлён.');
-        $this->assertTrue($first->fresh()->is_approved);
+    // DESTROY
+    $response = $this->delete(route('comments.destroy', $first));
+    $response
+        ->assertRedirect()
+        ->assertSessionHas('success', 'Комментарий удалён.');
+    $this->assertDatabaseMissing('comments', ['id' => $first->id]);
+}
 
-        // DESTROY (удаляем один)
-        $response = $this->delete(route('comments.destroy', $first));
-        $response
-            ->assertRedirect()
-            ->assertSessionHas('success', 'Комментарий удалён.');
-        $this->assertDatabaseMissing('comments', ['id' => $first->id]);
-    }
 }

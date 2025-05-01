@@ -32,19 +32,19 @@ class HomeController extends Controller
        
 
 
-        if (!$hero_section) {
-            abort(404, 'Hero section data not found.');
-        }
+        // if (!$hero_section) {
+        //     abort(404, 'Hero section data not found.');
+        // }
 
         
-        if (!$about_section) {
-            abort(404, 'About section data not found.');
-        }
+        // if (!$about_section) {
+        //     abort(404, 'About section data not found.');
+        // }
 
 
-        if (!$event_days) {
-            abort(404, 'Event section data not found.');
-        }
+        // if (!$event_days) {
+        //     abort(404, 'Event section data not found.');
+        // }
 
 
 
