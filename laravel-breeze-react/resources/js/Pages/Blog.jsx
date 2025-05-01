@@ -11,14 +11,16 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import PostCard from '@/Components/PostCard'
+import FlashMessage from '@/Components/FlashMessage';
 
 export default function Blog({ all_posts }) {
 
   const{auth}=usePage().props
   return (
     
-    <div className="min-h-screen flex flex-col">
     
+    <div className="min-h-screen flex flex-col">
+    <FlashMessage/>
      
 
     
