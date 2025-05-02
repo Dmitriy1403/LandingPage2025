@@ -17,7 +17,7 @@ export default function Home() {
   const { hero_section, about_section, event_days, speakers_event, tickets_event } =
     usePage().props;
 
-  // 1. Создаём рефы под каждую секцию, куда хотим скроллиться
+ 
   const aboutRef = useRef(null);
   const speakersRef = useRef(null);
   const scheduleRef = useRef(null);

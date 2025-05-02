@@ -4,19 +4,17 @@ import { usePage, useForm } from '@inertiajs/react';
 import { FaUsers, FaTicketAlt } from "react-icons/fa";
 import { Link } from '@inertiajs/react';
 import { Inertia } from '@inertiajs/inertia';
-
 import { Search } from "lucide-react";  // optional icon
-
-import axios from "axios";
-import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
+import FlashMessage from "./FlashMessage";
 
 import Sidebar from "./Sidebar";
 export default function ParticipantEvent({ participants_event, ticket_sum, totalParticipants,ticketSales,postLikeStats }) {
   // Инициализируем состояние списком участников из participants_event.data
   
 
+  
 
   const allParticipants = participants_event.data || [];
 
@@ -113,23 +111,20 @@ export default function ParticipantEvent({ participants_event, ticket_sum, total
 
 
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this participant?")) return;
-  
-    try {
-      await axios.delete(`/participants/${id}`);
+  const handleDelete = (id) => {
+    if (!confirm('Удалить этого участника?')) return;
+    Inertia.delete(route('participants.destroy', id), {
       
-      setParticipants((prev) => prev.filter((p) => p.id !== id));
-    } catch (error) {
-      console.error("Error deleting participant:", error);
-      alert("Failed to delete participant. Try again.");
-    }
+    });
   };
   
   return (
+    <>
     <Container className="mt-8 ">
         <div className="grid grid-cols-11 sm:grid-cols-2 gap-6 mt-8">
+          <FlashMessage/>
 
+       
        
 
       
@@ -407,9 +402,11 @@ export default function ParticipantEvent({ participants_event, ticket_sum, total
                   
                   {/* Кнопка Delete */}
                   <Button
+                    type="button"
                     variant="danger"
                     size="sm"
                     onClick={() => handleDelete(participant.id)}
+
                     className="bg-red-600 hover:bg-red-700 text-white"
                   >
                     Delete
@@ -447,5 +444,6 @@ export default function ParticipantEvent({ participants_event, ticket_sum, total
       </div>
 
     </Container>
+    </>
   );
 }

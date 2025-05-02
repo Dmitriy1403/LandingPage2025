@@ -187,15 +187,11 @@ class RegisterController extends Controller
     public function destroy($id)
 
     {
-        $participant = Register::find($id);
+       
 
-        if (!$participant) {
-            return response()->json(['error' => 'Participant not found'], 404);
-        }
-        
-        $participant->delete();
-
-        return response()->json(['success' => 'Participant deleted successfully']);
+               
+        Register::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Participant deleted successfully');
 
 
 
