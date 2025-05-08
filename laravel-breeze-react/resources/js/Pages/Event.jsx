@@ -204,7 +204,7 @@ export default function ScheduleEditor() {
   }
 
   const deleteAll = () => {
-    if (!confirm('Вы уверены, что хотите удалить ВСЁ расписание и все дни?')) {
+    if (!confirm('Are you sure you want to delete ALL schedules and all days?')) {
       return;
     }
     axios
@@ -212,7 +212,7 @@ export default function ScheduleEditor() {
       .then(() => location.reload())
       .catch((error) => {
         console.error('Error deleting all:', error);
-        alert('Произошла ошибка при удалении всех данных.');
+        alert('An error occurred while deleting all data');
       });
   };
 
@@ -364,7 +364,7 @@ export default function ScheduleEditor() {
                 }
               >
                 <div className="text-center ">
-                  <p className="font-semibold">День {index + 1}</p>
+                  <p className="font-semibold">Day {index + 1}</p>
                   <p className="text-sm">{day.event_date}</p>
                 </div>
               </Tab>

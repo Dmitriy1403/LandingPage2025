@@ -15,7 +15,7 @@ const containerVariants = {
 
 
 const blockVariants = {
-  hidden: { opacity: 0, y: 100 }, 
+  hidden: { opacity: 0, y: 200 }, 
   visible: {
     opacity: 1,
     y: 0, 

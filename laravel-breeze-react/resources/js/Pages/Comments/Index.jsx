@@ -22,16 +22,16 @@ export default function CommentsIndex() {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Управление комментариями</h1>
+      <h1 className="text-3xl font-bold mb-6">Managing comments</h1>
       <table className="w-full table-auto border-collapse">
         <thead>
           <tr className="bg-gray-100">
             <th className="border px-4 py-2">ID</th>
-            <th className="border px-4 py-2">Пользователь</th>
-            <th className="border px-4 py-2">К посту</th>
-            <th className="border px-4 py-2">Комментарий</th>
-            <th className="border px-4 py-2">Одобрен</th>
-            <th className="border px-4 py-2">Действие</th>
+            <th className="border px-4 py-2">User</th>
+            <th className="border px-4 py-2">To the post</th>
+            <th className="border px-4 py-2">Comments</th>
+            <th className="border px-4 py-2">Approved</th>
+            <th className="border px-4 py-2">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -60,7 +60,7 @@ export default function CommentsIndex() {
                   onClick={() => remove(c)}
                   className="px-3 py-1 rounded bg-red-600 hover:bg-red-700 text-white transition"
                 >
-                  Удалить
+                  Delete
                 </button> 
 
 
