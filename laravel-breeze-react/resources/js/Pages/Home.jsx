@@ -13,7 +13,7 @@ import FooterSponsors from "@/Components/FooterSponsors";
 import FlashMessage from "@/Components/FlashMessage";
 
 export default function Home() {
-  // Данные из контроллера (если нужны)
+
   const { hero_section, about_section, event_days, speakers_event, tickets_event } =
     usePage().props;
 
@@ -24,7 +24,7 @@ export default function Home() {
   const ticketsRef = useRef(null);
   const contactsRef = useRef(null);
 
-  // 2. Функция прокрутки
+ 
   const handleScrollToSection = (sectionName) => {
     switch (sectionName) {
       case "about":
@@ -46,7 +46,7 @@ export default function Home() {
         
       case "home":
       default:
-        // Прокрутка в самый верх
+        
         window.scrollTo({ top: 0, behavior: "smooth" });
         break;
     }
@@ -54,7 +54,7 @@ export default function Home() {
 
   return (
     <div className="w-full bg-gray-100 flex flex-col">
-      {/* Передаем handleScrollToSection в Header */}
+   
       <FlashMessage />
       
       <Header onScrollToSection={handleScrollToSection} />
@@ -63,7 +63,7 @@ export default function Home() {
 
       <main className="w-full flex flex-col px-4 py-8">
 
-        {/* About Section */}
+    
         <SectionTransition>
           {/* Оборачиваем AboutSection в <section ref={aboutRef}> */}
           <section ref={aboutRef}>
@@ -71,21 +71,20 @@ export default function Home() {
           </section>
         </SectionTransition>
 
-        {/* Speakers Section */}
+      
         <SectionTransition>
           <section ref={speakersRef}>
             <SpeakerSection speakers_event={speakers_event} />
           </section>
         </SectionTransition>
 
-        {/* Schedule Section */}
+       
         <SectionTransition>
           <section ref={scheduleRef}>
             <ScheduleSection event_days={event_days} />
           </section>
         </SectionTransition>
 
-        {/* Tickets Section */}
         <SectionTransition>
           <section ref={ticketsRef}>
             <TicketPricing tickets_event={tickets_event} />

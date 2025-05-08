@@ -89,7 +89,7 @@ class SpeakerController extends Controller
             'twitter'   => 'nullable|url',
             'linkedin'  => 'nullable|url',
             'facebook' => 'nullable|url',
-            'image' => 'nullable|image|max:3120', // до 5MB
+            'image' => 'nullable|image|max:3120', 
         ]);
 
 

@@ -23,7 +23,7 @@ export default function Registration() {
     e.preventDefault();
     post(route("registration"), {
       onSuccess: () => {
-        reset(); // Сбросить форму после успешной отправки
+        reset(); 
       },
     });
   };
@@ -31,19 +31,19 @@ export default function Registration() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4">
       <div className="w-full max-w-lg bg-white shadow-lg rounded-xl p-8">
-        {/* Заголовок */}
+    
         <h2 className="text-center text-3xl font-semibold text-gray-800 mb-6">
           Registration for the Event
         </h2>
 
-        {/* Вывод flash-сообщения об успехе */}
+    
         {flash && flash.success && (
           <div className="bg-green-100 text-green-700 text-center py-2 px-4 mb-4 rounded-lg">
             {flash.success}
           </div>
         )}
 
-        {/* Форма */}
+      
         <form onSubmit={handleSubmit} className="space-y-5">
 
           <div>
@@ -73,7 +73,6 @@ export default function Registration() {
 
 
 
-          {/* Group Name */}
           <div>
             <label htmlFor="groupName" className="block text-gray-700 font-medium">
               Group Name
@@ -96,7 +95,7 @@ export default function Registration() {
             {errors.groupName && <p className="text-red-500 text-sm mt-1">{errors.groupName}</p>}
           </div>
 
-          {/* Number of Participants */}
+        
           <div>
             <label htmlFor="participantsNumber" className="block text-gray-700 font-medium">
               Number of Participants
@@ -145,7 +144,6 @@ export default function Registration() {
             {errors.contactPerson && <p className="text-red-500 text-sm mt-1">{errors.contactPerson}</p>}
           </div>
 
-          {/* Email */}
           <div>
             <label htmlFor="email" className="block text-gray-700 font-medium">
               Email
@@ -168,7 +166,7 @@ export default function Registration() {
             {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
           </div>
 
-          {/* Phone */}
+       
           <div>
             <label htmlFor="phone" className="block text-gray-700 font-medium">
               Phone
@@ -191,7 +189,6 @@ export default function Registration() {
             {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
           </div>
 
-          {/* Comments */}
           <div>
             <label htmlFor="comments" className="block text-gray-700 font-medium">
               Comments
@@ -208,7 +205,7 @@ export default function Registration() {
             {errors.comments && <p className="text-red-500 text-sm mt-1">{errors.comments}</p>}
           </div>
 
-          {/* Кнопка отправки */}
+      
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
@@ -218,7 +215,7 @@ export default function Registration() {
           </button>
         </form>
 
-        {/* Ссылка для возврата */}
+     
         <div className="mt-4 text-center">
           <Link href="/" className="text-blue-600 hover:underline">
             Back to Home

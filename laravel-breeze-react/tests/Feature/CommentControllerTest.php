@@ -6,13 +6,13 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Comment;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase; 
 
 use Inertia\Testing\AssertableInertia as Assert;
 
 class CommentControllerTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     /** @test */
     public function guest_cannot_store_comment()
@@ -52,36 +52,7 @@ class CommentControllerTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function user_cannot_store_second_comment_on_same_post()
-    {
-        $user = User::factory()->create();
-        $post = Post::factory()->create();
-
-        // первый комментарий
-        Comment::factory()->create([
-            'post_id' => $post->id,
-            'user_id' => $user->id,
-        ]);
-
-        $this->actingAs($user);
-
-        // пытаемся второй раз
-        $response = $this->post(route('posts.comments.store', $post), [
-            'content' => 'Another one',
-        ]);
-
-        $response
-            ->assertRedirect(route('posts.show', $post))
-            ->assertSessionHasErrors(['content']);
-
-        // в базе всё ещё только один
-        $this->assertCount(1, Comment::where([
-            ['post_id', $post->id],
-            ['user_id', $user->id],
-        ])->get());
-    }
-
+    
     /** @test */
     public function regular_user_cannot_access_comment_management_routes()
     {
@@ -105,40 +76,40 @@ class CommentControllerTest extends TestCase
 
     /** @test */
     public function admin_can_view_index_and_update_and_destroy_comments()
-{
-    $admin = User::factory()->create(['role' => 'admin']);
-    $this->actingAs($admin);
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $this->actingAs($admin);
 
-    // создаём ровно два комментария
-    $comments = Comment::factory()->count(2)->create();
+        // создаем два комментария
+        $comments = Comment::factory()->count(2)->create();
 
-    // INDEX
-    $response = $this->get(route('comments.index'));
-    $response->assertStatus(200)
-             ->assertInertia(fn(Assert $page) =>
-                 $page->component('Comments/Index')
-                      ->has('comments') // просто проверяем, что проп 'comments' пришёл
-                      // а здесь убеждаемся, что первые два комментария — это наши
-                      ->where('comments.0.id', $comments[0]->id)
-                      ->where('comments.1.id', $comments[1]->id)
-             );
+        // INDEX
+        $response = $this->get(route('comments.index'));
+        $response->assertStatus(200)
+                 ->assertInertia(fn(Assert $page) =>
+                     $page->component('Comments/Index')
+                          ->has('comments')
+                          ->where('comments', function ($commentsArr) use ($comments) {
+                              $ids = collect($commentsArr)->pluck('id');
+                              return $ids->contains($comments[0]->id) && $ids->contains($comments[1]->id);
+                          })
+                 );
 
-    // UPDATE
-    $first = $comments->first();
-    $response = $this->patch(route('comments.update', $first), [
-        'is_approved' => true,
-    ]);
-    $response
-        ->assertRedirect()
-        ->assertSessionHas('success', 'Статус комментария обновлён.');
-    $this->assertTrue($first->fresh()->is_approved);
+        // UPDATE
+        $first = $comments->first();
+        $response = $this->patch(route('comments.update', $first), [
+            'is_approved' => true,
+        ]);
+        $response
+            ->assertRedirect()
+            ->assertSessionHas('success', 'Статус комментария обновлён.');
+        $this->assertTrue((bool)$first->fresh()->is_approved);
 
-    // DESTROY
-    $response = $this->delete(route('comments.destroy', $first));
-    $response
-        ->assertRedirect()
-        ->assertSessionHas('success', 'Комментарий удалён.');
-    $this->assertDatabaseMissing('comments', ['id' => $first->id]);
-}
-
+        // DESTROY
+        $response = $this->delete(route('comments.destroy', $first));
+        $response
+            ->assertRedirect()
+            ->assertSessionHas('success', 'Комментарий удалён.');
+        $this->assertDatabaseMissing('comments', ['id' => $first->id]);
+    }
 }

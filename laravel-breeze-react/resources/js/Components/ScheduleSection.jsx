@@ -39,10 +39,10 @@ export default function ScheduleSection({ event_days, speakers }) {
   };
 
   return (
-    <section className="container mx-auto px-6 md:px-12 lg:px-16 py-16">
-      <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-gray-900">Our Schedule</h2>
-        <p className="text-gray-600">
+    <section className="container mx-auto px-6  md:px-12 lg:px-16 py-16">
+      <div className="text-center mb-12 ">
+        <h2 className="text-4xl font-bold text-gray-900 2k:text-5xl pb-3">Our Schedule</h2>
+        <p className="text-gray-600 2k:text-3xl">
           Do not miss anything topic about the event
         </p>
       </div>

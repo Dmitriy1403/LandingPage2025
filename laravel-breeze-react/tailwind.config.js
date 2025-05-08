@@ -26,7 +26,10 @@ export default {
               },
 
             screens: {
-                'custom': '609px', 
+                'mobile':{ 'max': '375px' },
+                'custom': '609px',
+                '2k': '2048px',
+                '4k': '3840px', 
               },
         },
     },

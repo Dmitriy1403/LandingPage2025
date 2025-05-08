@@ -3,14 +3,14 @@ import React, { useState,useEffect } from 'react'
 import { useForm } from '@inertiajs/react'
 
 export default function Create() {
-  // стартовые данные + хук
+
   const { data, setData, post, processing, errors } = useForm({
     title: '',
     description: '',
     is_published: false,
-    // background_image:null,
+   
     published_at: '',
-    images: [],       // хук умеет работать с File[]
+    images: [],       
   })
 
 
@@ -20,13 +20,13 @@ export default function Create() {
 
 
 
-  // обычные инпуты
+
   const handleChange = (e) => {
     const { name, type, checked, value } = e.target
     setData(name, type === 'checkbox' ? checked : value)
   }
 
-  // файл‑инпут
+
   const handleFileChange = (e) => {
     const { name, files } = e.target;
   
@@ -63,12 +63,12 @@ export default function Create() {
 
   return (
     <div className="container mx-auto p-6 max-w-2xl">
-      <h1 className="text-3xl mb-6">Создать новый пост</h1>
+      <h1 className="text-3xl mb-6">Create a new post</h1>
 
       <form onSubmit={submit} encType="multipart/form-data" className="space-y-6">
         {/* Заголовок */}
         <div>
-          <label htmlFor="title" className="block mb-1">Заголовок</label>
+          <label htmlFor="title" className="block mb-1">Title</label>
           <input
             type="text"
             name="title"
@@ -82,7 +82,7 @@ export default function Create() {
 
         {/* Описание */}
         <div>
-          <label htmlFor="description" className="block mb-1">Описание</label>
+          <label htmlFor="description" className="block mb-1">Description</label>
           <textarea
             name="description"
             id="description"
@@ -104,12 +104,12 @@ export default function Create() {
             onChange={handleChange}
             className="mr-2"
           />
-          <label htmlFor="is_published">Опубликовать?</label>
+          <label htmlFor="is_published">Publish?</label>
         </div>
 
-        {/* Дата публикации */}
+      
         <div>
-          <label htmlFor="published_at" className="block mb-1">Дата публикации</label>
+          <label htmlFor="published_at" className="block mb-1">Date of publication</label>
           <input
             type="datetime-local"
             name="published_at"
@@ -121,7 +121,7 @@ export default function Create() {
         </div>
 
         <div>
-          <label htmlFor="background_image" className="block mb-1">Фоновое изображение</label>
+          <label htmlFor="background_image" className="block mb-1">Background image</label>
           <input
             id="background_image"
             name="background_image"
@@ -134,7 +134,7 @@ export default function Create() {
             <p className="text-red-600 text-sm">{errors.background_image}</p>
           )}
 
-          {/* preview */}
+         
           {bgPreview && (
             <img
               src={bgPreview}
@@ -144,9 +144,8 @@ export default function Create() {
           )}
         </div>
 
-        {/* Галерея изображений */}
         <div>
-          <label htmlFor="images" className="block mb-1">Галерея изображений</label>
+          <label htmlFor="images" className="block mb-1">Images Gallery</label>
           <input
             id="images"
             name="images"
@@ -158,7 +157,7 @@ export default function Create() {
           />
           {errors.images && <p className="text-red-600 text-sm">{errors.images}</p>}
 
-          {/* preview grid */}
+       
           {galleryPreview.length > 0 && (
             <div className="mt-3 grid grid-cols-3 gap-2">
               {galleryPreview.map((url, idx) => (

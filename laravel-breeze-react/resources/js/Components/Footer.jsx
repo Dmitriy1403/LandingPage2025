@@ -4,8 +4,11 @@ import FooterSponsors from "./FooterSponsors";
 
 export default function LocationSection() {
   return (
+    <>
+     <h2 className="text-4xl font-bold text-gray-900 2k:text-5xl pb-6 -mt-6 text-center ">CONTACTS</h2>
     <section className="relative flex flex-col md:flex-row w-full h-[500px] md:h-[600px]">
       {/* Левая часть с текстом */}
+     
       <div
         className="relative w-full md:w-1/2 flex items-center justify-center text-white px-8 md:px-16"
         style={{
@@ -57,7 +60,7 @@ export default function LocationSection() {
        
     </section>
 
-
+    </>
 
 
   );

@@ -47,7 +47,7 @@ export default function HeroSection({ hero_section }) {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat w-full h-full"
           style={{
             backgroundImage: `url(${hero_section.background_image})`,
-            filter: 'brightness(0.6)',
+            filter: 'brightness(0.3)',
           }}
         ></div>
       )}
@@ -61,12 +61,17 @@ export default function HeroSection({ hero_section }) {
       >
 
      
-        <p className="text-sm uppercase tracking-wide text-red-400">
+        <p className="text-2xl pb-5 uppercase tracking-wide text-orange-500
+                       mobile:text-lg 
+                       2k:text-3xl
+                       4k:text-2xl
+        
+                          ">
           {hero_section?.event_date}
         </p>
        
         <motion.h1
-          className="text-4xl md:text-5xl font-bold leading-tight"
+          className="text-4xl md:text-5xl 2k:text-6xl  font-bold pb-5 leading-tight"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -77,13 +82,24 @@ export default function HeroSection({ hero_section }) {
             </motion.span>
           ))}
         </motion.h1>
-        <p className="mt-2 text-lg">
+        <p className="mt-2 text-xl 2k:text-2xl">
           {hero_section?.subtitle || 'Join us at the biggest event of the year!'}
         </p>
 
         <Link
           href="/registration"
-          className="mt-6 inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition"
+          className="mt-6 inline-block
+           bg-orange-500
+            hover:bg-orange-600
+             text-white
+              font-semibold
+              py-3 px-6
+              2k:py-6
+              2k:px-12
+              2k:text-2xl
+
+
+           rounded-lg shadow-lg transition"
         >
           Buy Ticket
         </Link>
@@ -94,7 +110,15 @@ export default function HeroSection({ hero_section }) {
         <img
           src={hero_section.right_image}
           alt="Speaker"
-          className="absolute right-20 bottom-20 w-[250px] md:w-[350px] lg:w-[400px] object-contain z-20 hidden sm:block "
+          className="absolute right-20 bottom-20
+          2k:w-[550px]
+          
+           w-[250px] 
+           md:w-[350px]
+            lg:w-[400px] 
+            object-contain
+             z-20 hidden
+              sm:block "
         />
       )}
     </section>

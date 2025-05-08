@@ -46,6 +46,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('blog.index', absolute: false)) ->with('success', 'Ваш успешно зарегестрировались');
+        return redirect(route('blog.index', absolute: false)) ->with('success', 'You have successfully registered.');
     }
 }

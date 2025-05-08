@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('post_id');     // к какому посту относится комментарий
-            $table->unsignedBigInteger('user_id');       // автор комментария
+            $table->unsignedBigInteger('post_id');    
+            $table->unsignedBigInteger('user_id');      
             $table->text('content');
-            $table->boolean('is_approved')->default(false); // комментарии нужно утвердить
+            $table->boolean('is_approved')->default(false); 
             $table->timestamps();
 
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');

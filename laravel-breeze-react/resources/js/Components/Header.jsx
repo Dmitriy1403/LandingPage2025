@@ -40,7 +40,18 @@ export default function Header({onScrollToSection}) {
         </Link>
 
        
-        <Link href="/blog" className="hover:border-b-2 hover:border-blue-500 pb-1 text-white"> Blog</Link>
+        <Link
+  href="/blog"
+  className="
+    text-gray-700         /* светлая тема — серый */
+    dark:text-white       /* тёмная тема — белый */
+    border-b-2 border-transparent 
+    hover:border-blue-400 hover:text-blue-600 
+    transition
+  "
+>
+  Blog
+</Link>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center space-x-6 text-gray-700 dark:text-gray-200 font-medium">

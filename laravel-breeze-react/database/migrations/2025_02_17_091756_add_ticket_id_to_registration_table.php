@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('registration', function (Blueprint $table) {
-            $table->unsignedBigInteger('ticket_id')->nullable()->after('id'); // Внешний ключ
+            $table->unsignedBigInteger('ticket_id')->nullable()->after('id'); 
             
             $table->foreign('ticket_id')
                   ->references('id')
                   ->on('ticket_pricing')
-                  ->onDelete('set null'); // Если билет удален, поле остается NULL
+                  ->onDelete('set null'); 
         });
     }
 

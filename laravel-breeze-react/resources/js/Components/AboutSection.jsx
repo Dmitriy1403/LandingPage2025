@@ -27,10 +27,10 @@ export default function AboutSection({ about_section }) {
     <motion.section
       id="about"
       className="container mx-auto px-6 md:px-12 lg:px-16 py-16"
-      variants={container}               // подключаем контейнер
-      initial="hidden"                   // начальное состояние
-      whileInView="visible"              // когда в зоне видимости
-      viewport={{ once: true, amount: 0.3 }} // запуск один раз, при 30% попадании
+      variants={container}               
+      initial="hidden"                  
+      whileInView="visible"              
+      viewport={{ once: true, amount: 0.3 }} 
     >
       <div className="flex flex-col md:flex-row items-center gap-8">
         {/* Левая часть с изображением */}
@@ -47,30 +47,30 @@ export default function AboutSection({ about_section }) {
           </motion.div>
         )}
 
-        {/* Правая часть с текстом */}
+     
         <motion.div
           className="w-full md:w-1/2"
-          variants={item}                // и для текстового блока
+          variants={item}              
         >
           
-          <h2 className="text-3xl font-bold mb-4 text-gray-900">
+          <h2 className="text-3xl font-bold mb-4 text-gray-900 2k:text-5xl">
             {about_section?.title || 'About Conference'}
           </h2>
-          <p className="text-gray-600 mb-4 leading-relaxed text-justify">
+          <p className="text-gray-600 mb-4 leading-relaxed text-justify 2k:text-xl">
             {about_section?.description}
           </p>
 
-          {/* Список особенностей */}
+        
           {about_section?.features && Array.isArray(about_section.features) && (
             <ul className="mb-6 space-y-2">
               {about_section.features.map((feature, index) => (
                 <motion.li
                   key={index}
-                  className="flex items-center text-gray-800"
+                  className="flex items-center text-gray-800 2k:text-xl"
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.2, duration: 0.5 }}
-                  viewport={{ once: true }}     // можно даже для каждого <li> подключить тот же item
+                  viewport={{ once: true }}     
                 >
                   <span className="text-red-500 mr-2">✔</span> {feature}
                 </motion.li>

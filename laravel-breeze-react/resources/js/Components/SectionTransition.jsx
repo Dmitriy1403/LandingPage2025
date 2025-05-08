@@ -12,7 +12,7 @@ export default function SectionTransition({ children }) {
       style={{ y }}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }} // Анимация срабатывает, когда секция появляется в 30% видимой области
+      viewport={{ once: true, amount: 0.1 }} 
       transition={{ duration: 0.8, ease: 'easeOut' }}
       className="my-12"
     >

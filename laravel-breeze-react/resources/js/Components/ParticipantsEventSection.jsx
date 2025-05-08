@@ -121,8 +121,9 @@ export default function ParticipantEvent({ participants_event, ticket_sum, total
   return (
     <>
     <Container className="mt-8 ">
+    <FlashMessage/>
         <div className="grid grid-cols-11 sm:grid-cols-2 gap-6 mt-8">
-          <FlashMessage/>
+        
 
        
        

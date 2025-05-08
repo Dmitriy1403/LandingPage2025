@@ -8,6 +8,16 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export default function Edit() {
   const { post } = usePage().props;
   const [toDelete, setToDelete] = useState([]);
+
+  // Инициализируем превью существующих изображений сразу из post.images
+  const initialPreviews = post.images?.map(img => ({
+    id: img.id,
+    url: '/' + img.image_path
+  })) || [];
+
+  const [existingPreviews, setExistingPreviews] = useState(initialPreviews);
+  const [newPreviews, setNewPreviews] = useState([]);
+
   const [form, setForm] = useState({
     title: post.title || '',
     description: post.description || '',
@@ -17,23 +27,23 @@ export default function Edit() {
     images: [],
   });
   const [errors, setErrors] = useState({});
-  const [bgPreview, setBgPreview] = useState(post.background_image ? `/${post.background_image}` : null);
+  const [bgPreview, setBgPreview] = useState(
+    post.background_image ? `/${post.background_image}` : null
+  );
   const [bgNew, setBgNew] = useState(null);
-  const [existingPreviews, setExistingPreviews] = useState([]);
-  const [newPreviews, setNewPreviews] = useState([]);
 
+  // Если post.images меняется, обновляем превью
   useEffect(() => {
     if (post.images?.length) {
-      setExistingPreviews(post.images.map(img => ({
-        id: img.id,
-        url: '/' + img.image_path
-      })));
+      setExistingPreviews(
+        post.images.map(img => ({ id: img.id, url: '/' + img.image_path }))
+      );
     }
   }, [post.images]);
 
   const toggleDelete = id => {
     setToDelete(prev =>
-      prev.includes(id) ? prev.filter(i => i!==id) : [...prev, id]
+      prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
     );
   };
 
@@ -58,9 +68,7 @@ export default function Edit() {
     e.preventDefault();
     setErrors({});
     const fd = new FormData();
-    // Метод override для Laravel
     fd.append('_token', document.querySelector('meta[name="csrf-token"]').content);
-
     fd.append('_method', 'PUT');
     fd.append('title', form.title);
     fd.append('description', form.description);
@@ -76,19 +84,13 @@ export default function Edit() {
         fd,
         {
           headers: {
-
             'X-Requested-With': 'XMLHttpRequest',
-        
-           
-
           },
         }
       );
-      
       window.location.href = route('posts.index');
     } catch (err) {
       if (err.response?.status === 422) {
-        
         setErrors(err.response.data.errors || {});
       } else {
         console.error(err);
@@ -99,14 +101,14 @@ export default function Edit() {
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-xl">
-      <h1 className="text-3xl font-bold mb-6">Редактировать пост</h1>
+      <h1 className="text-3xl font-bold mb-6">Edit post</h1>
       <form onSubmit={submit} encType="multipart/form-data" className="space-y-6">
         {/* — Фоновое изображение — */}
         <div>
-          <p className="font-medium mb-2">Фоновое изображение</p>
+          <p className="font-medium mb-2">Background image</p>
           {bgPreview
-            ? <img src={bgPreview} className="w-full h-48 object-cover rounded mb-4 border"/>
-            : <p className="text-gray-500 mb-4">Нет фонового изображения</p>
+            ? <img src={bgPreview} className="w-full h-48 object-cover rounded mb-4 border" />
+            : <p className="text-gray-500 mb-4">No background image</p>
           }
           <input
             type="file"
@@ -118,11 +120,11 @@ export default function Edit() {
           {errors.background_image && <p className="text-red-600 text-sm">{errors.background_image}</p>}
         </div>
 
-        {/* — Превью галереи — */}
+        {/* — Превью галереи существующих и новых изображений — */}
         <div className="flex flex-wrap gap-4 mb-4">
           {existingPreviews.map(({ id, url }) => (
             <div key={id} className="relative group">
-              <img src={url} className="w-32 h-32 object-cover rounded border"/>
+              <img src={url} className="w-32 h-32 object-cover rounded border" />
               <input
                 type="checkbox"
                 checked={toDelete.includes(id)}
@@ -131,14 +133,14 @@ export default function Edit() {
               />
             </div>
           ))}
-          {newPreviews.map((url,i) => (
-            <img key={i} src={url} className="w-32 h-32 object-cover rounded border"/>
+          {newPreviews.map((url, i) => (
+            <img key={i} src={url} className="w-32 h-32 object-cover rounded border" />
           ))}
         </div>
 
         {/* — Заголовок — */}
         <div>
-          <label className="block mb-1 font-medium">Заголовок</label>
+          <label className="block mb-1 font-medium">Title</label>
           <input
             type="text"
             name="title"
@@ -149,9 +151,9 @@ export default function Edit() {
           {errors.title && <p className="text-red-600 text-sm">{errors.title}</p>}
         </div>
 
-       
+        {/* — Описание — */}
         <div>
-          <label className="block mb-1 font-medium">Описание</label>
+          <label className="block mb-1 font-medium">Description</label>
           <CKEditor
             editor={ClassicEditor}
             data={form.description}
@@ -170,12 +172,12 @@ export default function Edit() {
             onChange={handleChange}
             className="mr-2"
           />
-          <label>Опубликовать?</label>
+          <label>Publish?</label>
         </div>
 
         {/* — Дата публикации — */}
         <div>
-          <label className="block mb-1 font-medium">Дата публикации</label>
+          <label className="block mb-1 font-medium">Date of publication</label>
           <input
             type="datetime-local"
             name="published_at"
@@ -187,7 +189,7 @@ export default function Edit() {
 
         {/* — Добавить изображения — */}
         <div>
-          <label className="block mb-1 font-medium">Добавить изображения</label>
+          <label className="block mb-1 font-medium">Add images</label>
           <input
             type="file"
             name="images"

@@ -10,7 +10,7 @@ export default function Index({ posts }) {
   return (
     <div className="container mx-auto px-4 py-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Список постов</h1>
+        <h1 className="text-3xl font-bold">List of posts</h1>
         <div className='flex flex-items-center'>
 
          
@@ -20,7 +20,7 @@ export default function Index({ posts }) {
            href={route('posts.create')}
   className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
           >
-            Создать новый пост
+            Create a new post
           </Link>
 
          

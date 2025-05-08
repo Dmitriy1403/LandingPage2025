@@ -170,7 +170,7 @@ Logout
         
 
         <section className="space-y-8">
-          <h2 className="text-2xl font-semibold border-b pb-2 mb-4">Комментарии</h2>
+          <h2 className="text-2xl font-semibold border-b pb-2 mb-4">Comments</h2>
 
           {/* Локальный flash */}
           {localSuccess && (
@@ -218,23 +218,23 @@ Logout
           ) : (
             /* Если нет комментариев и нет локального сообщения */
             !localSuccess && (
-              <p className="text-gray-600">Комментариев пока нет.</p>
+              <p className="text-gray-600">There are no comments yet.</p>
             )
           )}
 
           {/* Не залогинился */}
           {!auth.user && (
             <p className="text-gray-600">
-              Для комментариев нужно{' '}
+              To comment you need{' '}
               <Link href="/login" className="text-blue-600 hover:underline">
-                войти
+              Login
               </Link>{' '}
-              или{' '}
+              or{' '}
               <Link
                 href="/register"
                 className="text-blue-600 hover:underline"
               >
-                зарегистрироваться
+                register
               </Link>.
             </p>
           )}
@@ -242,14 +242,14 @@ Logout
           {/* Сообщение если уже комментировал */}
           {auth.user && (hasCommented || submitted) && (
             <p className="text-gray-800">
-              {localSuccess || 'Вы уже оставили комментарий.'}
+              {localSuccess || 'You have already left a comment'}
             </p>
           )}
 
           {/* Форма, если можно комментировать */}
           {auth.user && !hasCommented && !submitted && (
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl mb-4">Оставить комментарий</h3>
+              <h3 className="text-xl mb-4">Leave a comment</h3>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <CKEditor
                   editor={ClassicEditor}
@@ -265,7 +265,7 @@ Logout
                     disabled={submitting}
                     className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
                   >
-                    {submitting ? 'Отправка...' : 'Отправить'}
+                    {submitting ? 'Sending...' : 'Send'}
                   </button>
                 </div>
               </form>
@@ -278,7 +278,7 @@ Logout
             href="/blog"
             className="bg-blue-600 text-white px-4 py-2 rounded"
           >
-            Назад к списку
+            Back to list
           </Link>
         </div>
       </div>

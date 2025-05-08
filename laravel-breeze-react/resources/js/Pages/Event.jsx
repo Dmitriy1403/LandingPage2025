@@ -16,7 +16,7 @@ export default function ScheduleEditor() {
   const [editPreviewImage, setEditPreviewImage] = useState(null);
 
 
-  // Загружаем спикеров
+
   useEffect(() => {
     axios
       .get(route('events.getSpeakers'))
@@ -155,7 +155,7 @@ export default function ScheduleEditor() {
     });
   }
 
-  // Чтобы отправить запрос методом PUT через Inertia (который по сути оборачивает POST)
+
   formData.append("_method", "PUT");
 
   console.log("FormData entries:");
@@ -178,9 +178,7 @@ export default function ScheduleEditor() {
     resetEditScheduleForm();
   };
 
-  // ------------------------------
-  // Удаление мероприятия и всего расписания
-  // ------------------------------
+
   const deleteEvent = (eventId) => {
     if (!confirm('Точно удалить это событие?')) return;
     axios
@@ -218,9 +216,7 @@ export default function ScheduleEditor() {
       });
   };
 
-  // ------------------------------
-  // Вспомогательная функция форматирования времени
-  // ------------------------------
+
   const formatTime = (timeString) => {
     if (!timeString) return '';
     const date = new Date(`1970-01-01T${timeString}Z`);
@@ -234,7 +230,7 @@ export default function ScheduleEditor() {
 
   return (
     <section className="container mx-auto px-6 py-8">
-      <h1 className="text-3xl font-bold mb-6">Редактор расписания</h1>
+      <h1 className="text-3xl font-bold mb-6">Schedule Editor</h1>
 
       {flash?.success && (
         <div className="bg-green-100 text-green-700 py-2 px-4 mb-4 rounded">
@@ -246,7 +242,7 @@ export default function ScheduleEditor() {
       <div className="mb-8 flex flex-col md:flex-row md:space-x-8">
         {/* Форма добавления нового дня */}
         <form onSubmit={submitDay} className="bg-white p-6 rounded shadow flex-1 mb-4 md:mb-0">
-          <h2 className="text-xl font-semibold mb-4">Добавить новый день</h2>
+          <h2 className="text-xl font-semibold mb-4">Add new day</h2>
           <input
             type="text"
             placeholder="Название дня"
@@ -260,18 +256,18 @@ export default function ScheduleEditor() {
             onChange={(e) => setDayData('event_date', e.target.value)}
             className="w-full px-4 py-2 border rounded mb-4"
           />
-          <button className="bg-blue-600 text-white px-4 py-2 rounded">Добавить день</button>
+          <button className="bg-blue-600 text-white px-4 py-2 rounded">Add day</button>
         </form>
 
         {/* Форма добавления нового мероприятия */}
         <form onSubmit={submitSchedule} className="bg-white p-6 rounded shadow flex-1">
-          <h2 className="text-xl font-semibold mb-4">Добавить мероприятие</h2>
+          <h2 className="text-xl font-semibold mb-4">Add event</h2>
           <select
             value={scheduleData.event_day_id}
             onChange={(e) => setScheduleData('event_day_id', e.target.value)}
             className="w-full px-4 py-2 border rounded mb-4"
           >
-            <option value="">Выберите день</option>
+            <option value="">Choose day</option>
             {event_days?.map((day) => (
               <option key={day.id} value={day.id}>
                 {day.title} — {day.event_date}
@@ -308,7 +304,7 @@ export default function ScheduleEditor() {
           />
           {previewImage && (
             <div className="mb-4">
-              <p className="text-sm text-gray-600 mb-2">Превью:</p>
+              <p className="text-sm text-gray-600 mb-2">Preview:</p>
               <img src={previewImage} alt="Preview" className="w-40 h-40 object-cover rounded-md border" />
             </div>
           )}
@@ -326,7 +322,7 @@ export default function ScheduleEditor() {
             onChange={(e) => setScheduleData('description', e.target.value)}
             className="w-full px-4 py-2 border rounded mb-4"
           ></textarea>
-          <label className="block font-semibold mb-2">Выберите спикеров</label>
+          <label className="block font-semibold mb-2">Choose Speaker</label>
           <select
             multiple
             value={scheduleData.speakers}
@@ -344,14 +340,14 @@ export default function ScheduleEditor() {
               </option>
             ))}
           </select>
-          <button className="bg-green-600 text-white px-4 py-2 rounded">Добавить мероприятие</button>
+          <button className="bg-green-600 text-white px-4 py-2 rounded">Add Event</button>
         </form>
       </div>
 
       {/* Кнопка для удаления всего расписания */}
       <div className="mb-8">
         <button onClick={deleteAll} className="bg-red-600 text-white px-4 py-2 rounded">
-          Удалить все дни и мероприятия
+         Delete All Days and All Schedules
         </button>
       </div>
 
@@ -393,13 +389,13 @@ export default function ScheduleEditor() {
                       onChange={(e) => setEditDayData('event_date', e.target.value)}
                       className="px-4 py-2 border rounded"
                     />
-                    <button className="bg-blue-600 text-white px-3 py-1 rounded">Сохранить</button>
+                    <button className="bg-blue-600 text-white px-3 py-1 rounded">Save</button>
                     <button
                       type="button"
                       onClick={cancelEditDay}
                       className="bg-gray-400 text-white px-3 py-1 rounded"
                     >
-                      Отмена
+                      Cancel
                     </button>
                   </form>
                 ) : (
@@ -412,14 +408,14 @@ export default function ScheduleEditor() {
                         onClick={() => handleEditDay(day)}
                         className="bg-yellow-500 text-white px-3 py-1   rounded"
                       >
-                        Редактировать день
+                        Edit day
                       </button>
 
                       <button
                         onClick={() => deleteDay(day.id)}
                         className="bg-red-600 text-white px-1 py-1  rounded "
                       >
-                        Удалить день
+                        delete day
                       </button>
                     </div>
 
@@ -487,7 +483,7 @@ export default function ScheduleEditor() {
 
                         </div>
                         <div className="mb-4">
-                          <label className="block font-semibold mb-2">Описание мероприятия</label>
+                          <label className="block font-semibold mb-2">Schedule description</label>
                           <CKEditor
   editor={ClassicEditor}
   config={{
@@ -525,7 +521,7 @@ export default function ScheduleEditor() {
                         />
                         {editPreviewImage && (
                           <div className="mb-4">
-                            <p className="text-sm text-gray-600 mb-2">Новое превью:</p>
+                            <p className="text-sm text-gray-600 mb-2">New preview:</p>
                             <img src={editPreviewImage} alt="Edit Preview" className="w-40 h-40 object-cover rounded-md border" />
                           </div>
                         )}
@@ -533,14 +529,14 @@ export default function ScheduleEditor() {
 
                         <div className="flex space-x-2">
                           <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded">
-                            Сохранить
+                            Save
                           </button>
                           <button
                             type="button"
                             onClick={cancelEditEvent}
                             className="bg-gray-400 text-white px-4 py-2 rounded"
                           >
-                            Отмена
+                            Cancel
                           </button>
                         </div>
                       </form>
@@ -568,7 +564,7 @@ export default function ScheduleEditor() {
                           <div className="mt-2" dangerouslySetInnerHTML={{ __html: event.description }}></div>
                           {event.speakers && event.speakers.length > 0 && (
                             <div className="mt-2">
-                              <p className="font-semibold text-gray-700">Спикеры:</p>
+                              <p className="font-semibold text-gray-700">Speakers:</p>
                               <ul>
                                 {event.speakers.map((speaker) => (
                                   <li key={speaker.id} className="text-gray-600">
@@ -584,13 +580,13 @@ export default function ScheduleEditor() {
                             onClick={() => handleEditEvent(event)}
                             className="bg-yellow-500 text-white px-3 py-1 rounded mr-2"
                           >
-                            Редактировать
+                            Edit
                           </button>
                           <button
                             onClick={() => deleteEvent(event.id)}
                             className="bg-red-600 text-white px-3 py-1 rounded"
                           >
-                            Удалить
+                            Delete
                           </button>
                         </div>
                       </div>
@@ -598,13 +594,13 @@ export default function ScheduleEditor() {
                   </div>
                 ))
               ) : (
-                <p className="text-gray-500 text-center">Для этого дня нет мероприятий</p>
+                <p className="text-gray-500 text-center">Don't have schedule for this day</p>
               )}
             </TabPanel>
           ))}
         </Tabs>
       ) : (
-        <p className="text-gray-500 text-center">Нет доступных дней</p>
+        <p className="text-gray-500 text-center">Don't have abble days</p>
       )}
 
 <button  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 mt-8 rounded">

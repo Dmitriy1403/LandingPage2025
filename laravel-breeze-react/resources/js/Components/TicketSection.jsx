@@ -9,10 +9,12 @@ const TicketPricing = ({ tickets_event }) => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",       
+        backgroundBlendMode: "multiply" 
       }}
     >
       <div className="mx-auto max-w-4xl text-center">
-        <h2 className="text-base font-semibold text-indigo-600">Pricing</h2>
+       
         <p className="mt-2 text-5xl font-semibold tracking-tight text-indigo-900 sm:text-6xl">
           Choose Your Ticket
         </p>

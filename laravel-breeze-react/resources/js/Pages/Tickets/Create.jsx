@@ -32,10 +32,10 @@ const Create = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow rounded mt-8">
-      <h1 className="text-2xl font-bold mb-4">Добавить новый билет</h1>
+      <h1 className="text-2xl font-bold mb-4">Add new ticket</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label className="block font-medium">Название</label>
+          <label className="block font-medium">Ticket Name</label>
           <input
             type="text"
             name="title"
@@ -49,7 +49,7 @@ const Create = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block font-medium">Цена</label>
+          <label className="block font-medium">Price</label>
           <input
             type="number"
             name="price"
@@ -63,7 +63,7 @@ const Create = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block font-medium">Функции</label>
+          <label className="block font-medium">Features</label>
           {values.features.map((feature, index) => (
             <div key={index} className="mb-2">
               <input
@@ -79,7 +79,7 @@ const Create = () => {
             onClick={addFeature}
             className="text-blue-600 hover:text-blue-800 underline"
           >
-            Добавить функцию
+           Add Features
           </button>
           {errors.features && (
             <div className="text-red-600 text-sm">{errors.features}</div>
@@ -90,13 +90,13 @@ const Create = () => {
           type="submit"
           className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
         >
-          Создать
+          Create
         </button>
         <Link
           href="/tickets"
           className="ml-4 text-blue-600 hover:text-blue-800 underline"
         >
-          Назад
+          Back
         </Link>
       </form>
     </div>

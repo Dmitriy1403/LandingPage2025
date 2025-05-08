@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('blog.index', absolute: false));
+        return redirect()->intended(route('blog.index', absolute: false))->with('success', 'you are logged in');
     }
 
     /**
@@ -47,6 +47,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'you are logged out');
     }
 }

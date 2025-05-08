@@ -47,7 +47,7 @@ Route::get('/login', function () {
     ]);
 });
 
-    Route::middleware(['auth', AdminMiddleware::class])->group(function () {
+Route::middleware(['auth', AdminMiddleware::class])->group(function () {
 
         Route::get('/dashboard', [RegisterController::class, 'index'])->name('dashboard');
     
@@ -61,29 +61,30 @@ Route::get('/login', function () {
     // Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 
 
-Route::get('/events', [EventDayController::class, 'index'])->name('events.index');
-Route::post('/events/days', [EventDayController::class, 'storeDay'])->name('events.storeDay');
-Route::get('/events/speakers',[SpeakerController::class,'getSpeakers'])->name('events.getSpeakers');
+    Route::get('/events', [EventDayController::class, 'index'])->name('events.index');
+    Route::post('/events/days', [EventDayController::class, 'storeDay'])->name('events.storeDay');
+    Route::get('/events/speakers',[SpeakerController::class,'getSpeakers'])->name('events.getSpeakers');
 
-Route::post('/events/schedule', [EventDayController::class, 'storeSchedule'])->name('events.storeSchedule');
+    Route::post('/events/schedule', [EventDayController::class, 'storeSchedule'])->name('events.storeSchedule');
 
 
-Route::put('/events/day/{id}', [EventDayController::class, 'updateDay'])->name('events.updateDay');
-Route::put('/events/schedule/{id}', [EventDayController::class, 'updateSchedule'])->name('events.updateSchedule');
-Route::delete('/events/schedule/{id}', [EventDayController::class, 'destroy'])->name('events.destroySchedule');
-Route::delete('/events/destroyAll', [EventDayController::class, 'destroyAll'])->name('events.destroyAll');
-Route::delete('/events/deleteDay{id}', [EventDayController::class, 'deleteDay'])->name('events.deleteDay');
-Route::patch('/registration/{id}', [RegisterController::class, 'update'])->name('registration.update');
+    Route::put('/events/day/{id}', [EventDayController::class, 'updateDay'])->name('events.updateDay');
+    Route::put('/events/schedule/{id}', [EventDayController::class, 'updateSchedule'])->name('events.updateSchedule');
+    Route::delete('/events/schedule/{id}', [EventDayController::class, 'destroy'])->name('events.destroySchedule');
+    Route::delete('/events/destroyAll', [EventDayController::class, 'destroyAll'])->name('events.destroyAll');
+    Route::delete('/events/deleteDay{id}', [EventDayController::class, 'deleteDay'])->name('events.deleteDay');
+    Route::patch('/registration/{id}', [RegisterController::class, 'update'])->name('registration.update');
 
-Route::resource('speakers', SpeakerController::class)->except('show');
-Route::resource('tickets',TicketController::class);
+    Route::resource('speakers', SpeakerController::class)->except('show');
 
-Route::get('/comments', [CommentController::class, 'index'])
-     ->name('comments.index');
-Route::patch('/comments/{comment}', [CommentController::class, 'update'])
-     ->name('comments.update');
+    Route::resource('tickets',TicketController::class);
 
-     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])
+    Route::get('/comments', [CommentController::class, 'index'])
+        ->name('comments.index');
+    Route::patch('/comments/{comment}', [CommentController::class, 'update'])
+        ->name('comments.update');
+
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])
      ->name('comments.destroy');     
 
 

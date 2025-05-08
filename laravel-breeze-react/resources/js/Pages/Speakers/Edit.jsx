@@ -15,14 +15,14 @@ const Edit = () => {
     instagram: '',
     twitter: '',
     linkedin: '',
-    // Вместо строки будем хранить файл (или null)
+   
     image: null,
   });
 
-  // В previewUrl будем хранить ссылку на выбранный файл (созданную через URL.createObjectURL)
+ 
   const [previewUrl, setPreviewUrl] = useState(null);
 
-  // Когда получаем данные "speaker", инициализируем поля
+
   useEffect(() => {
     if (speaker) {
       setValues({
@@ -33,14 +33,14 @@ const Edit = () => {
         instagram: speaker.instagram || '',
         twitter: speaker.twitter || '',
         linkedin: speaker.linkedin || '',
-        image: null, // Текущее поле для загрузки оставляем пустым
+        image: null, 
       });
-      // При загрузке страницы убираем preview
+     
       setPreviewUrl(null);
     }
   }, [speaker]);
 
-  // Обработчик текстовых полей
+
   const handleChange = (e) => {
     setValues((prev) => ({
       ...prev,
@@ -48,15 +48,15 @@ const Edit = () => {
     }));
   };
 
-  // Обработчик выбора нового файла
+ 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setValues((prev) => ({
       ...prev,
-      image: file || null, // если пользователь уберёт файл, image будет null
+      image: file || null, 
     }));
 
-    // Создаём preview, если файл выбран
+
     if (file) {
       setPreviewUrl(URL.createObjectURL(file));
     } else {
@@ -64,11 +64,11 @@ const Edit = () => {
     }
   };
 
-  // Отправка формы
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Поскольку мы передаём файл, используем FormData
+   
     const formData = new FormData();
     formData.append('_method', 'PUT');
     formData.append('name', values.name);
@@ -79,7 +79,7 @@ const Edit = () => {
     formData.append('twitter', values.twitter);
     formData.append('linkedin', values.linkedin);
 
-    // Если пользователь загрузил новый файл
+   
     if (values.image) {
       formData.append('image', values.image);
     }
@@ -99,10 +99,10 @@ const Edit = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded shadow mt-8">
-      <h1 className="text-2xl font-bold mb-6">Редактировать спикера</h1>
+      <h1 className="text-2xl font-bold mb-6">Edit Speaker</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4" encType="multipart/form-data">
-        {/* Имя */}
+      
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Имя <span className="text-red-500">*</span>
@@ -118,7 +118,7 @@ const Edit = () => {
           
           {errors.name && <div className="text-red-600 text-sm">{errors.name} </div>}
        </div>
-        {/* Title */}
+      
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Название (title)
@@ -132,7 +132,6 @@ const Edit = () => {
           />
         </div>
 
-        {/* Email */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Email
@@ -146,7 +145,6 @@ const Edit = () => {
           />
         </div>
 
-        {/* Facebook */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Facebook
@@ -160,7 +158,7 @@ const Edit = () => {
           />
         </div>
 
-        {/* Instagram */}
+       
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Instagram
@@ -174,7 +172,7 @@ const Edit = () => {
           />
         </div>
 
-        {/* Twitter */}
+     
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Twitter
@@ -188,7 +186,7 @@ const Edit = () => {
           />
         </div>
 
-        {/* LinkedIn */}
+      
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             LinkedIn
@@ -202,10 +200,10 @@ const Edit = () => {
           />
         </div>
 
-        {/* Текущее фото (если есть) */}
+       
         {speaker.image && !previewUrl && (
           <div>
-            <p className="text-sm text-gray-700 mb-1">Текущее фото:</p>
+            <p className="text-sm text-gray-700 mb-1">Current photo:</p>
             <img
               className="w-40 h-40 object-cover rounded border mb-2"
               src={`/img/speakers/${speaker.image}`}    
@@ -217,7 +215,7 @@ const Edit = () => {
         {/* Загрузка нового файла + предварительный просмотр */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Новое фото (при загрузке будет заменено):
+            New photo (will be replace next download):
           </label>
           <input
             type="file"
@@ -229,7 +227,7 @@ const Edit = () => {
           {/* Предварительный просмотр (если есть новый файл) */}
           {previewUrl && (
             <div className="mt-3">
-              <p className="text-sm text-gray-700 mb-1">Предпросмотр нового фото:</p>
+              <p className="text-sm text-gray-700 mb-1">New Photo preview:</p>
               <img
                 className="w-40 h-40 object-cover rounded border"
                 src={previewUrl}
@@ -251,7 +249,7 @@ const Edit = () => {
            href="/speakers"
            
          >
-           Назад к списку
+           Back To List
          </Link>
 
          </button>
@@ -260,7 +258,7 @@ const Edit = () => {
             type="submit"
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
           >
-            Обновить
+            Update
           </button>
 
          

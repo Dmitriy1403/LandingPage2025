@@ -8,8 +8,8 @@ const SpeakerSection = ({ speakers_event }) => {
                 <div className="flex flex-col items-center">
                     <div className="w-full text-center">
                         <div className="mb-6">
-                            <h2 className="text-3xl font-bold">Who’s speaking</h2>
-                            <p className="text-gray-600">These are our communicators, you can see each person's information</p>
+                            <h2 className="text-3xl pb-3 font-bold 2k:text-5xl">Speakers</h2>
+                            <p className="text-gray-600 2k:text-2xl">These are our communicators, you can see each person's information</p>
                         </div>
                     </div>
                 </div>

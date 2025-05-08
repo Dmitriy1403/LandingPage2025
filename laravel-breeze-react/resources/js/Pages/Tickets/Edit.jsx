@@ -53,11 +53,11 @@ export default function Edit() {
   /* ──────────────────── render ──────────────────── */
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow rounded mt-8">
-      <h1 className="text-2xl font-bold mb-4">Редактировать билет</h1>
+      <h1 className="text-2xl font-bold mb-4">Edit Ticket</h1>
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Title */}
         <div className="mb-4">
-          <label className="block font-medium">Название</label>
+          <label className="block font-medium">Name</label>
           <input
             type="text"
             name="title"
@@ -70,7 +70,7 @@ export default function Edit() {
 
         {/* Price */}
         <div className="mb-4">
-          <label className="block font-medium">Цена</label>
+          <label className="block font-medium">Price</label>
           <input
             type="number"
             name="price"
@@ -83,7 +83,7 @@ export default function Edit() {
 
         {/* Features with remove button */}
         <div className="mb-4">
-          <label className="block font-medium">Функции</label>
+          <label className="block font-medium">Features</label>
           {values.features.map((feature, index) => (
             <div key={index} className="mb-2 flex items-center">
               <input
@@ -107,7 +107,7 @@ export default function Edit() {
             onClick={addFeature}
             className="text-blue-600 hover:text-blue-800 underline"
           >
-            Добавить функцию
+            Add Feature
           </button>
           {errors.features && <div className="text-red-600 text-sm">{errors.features}</div>}
         </div>
@@ -118,13 +118,13 @@ export default function Edit() {
             type="submit"
             className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
           >
-            Обновить
+            Update
           </button>
           <Link
             href="/tickets"
             className="text-blue-600 hover:text-blue-800 underline"
           >
-            Назад
+            Back
           </Link>
         </div>
       </form>

@@ -7,7 +7,7 @@ const Index = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded mt-8">
-      <h1 className="text-2xl font-bold mb-4">Список билетов</h1>
+      <h1 className="text-2xl font-bold mb-4">Ticket List</h1>
 
       {flash?.success && (
         <div className="mb-4 px-4 py-2 bg-green-100 text-green-800 rounded">
@@ -20,7 +20,7 @@ const Index = () => {
           href="/tickets/create"
           className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
         >
-          Добавить билет
+          Add Ticket
         </Link>
       </div>
 
@@ -39,7 +39,7 @@ const Index = () => {
                 href={`/tickets/${ticket.id}/edit`}
                 className="text-blue-600 hover:text-blue-800"
               >
-                Редактировать
+                Edit
               </Link>
               <button
                 onClick={() => {
@@ -49,7 +49,7 @@ const Index = () => {
                 }}
                 className="text-red-600 hover:text-red-800"
               >
-                Удалить
+                Delete
               </button>
             </div>
           </li>

@@ -18,7 +18,7 @@ class CommentController extends Controller
     {
 
         $data = $request->validate([
-            'content' => 'required|string',
+            'content' => 'required|string|max:1000',
         ]);
     
        

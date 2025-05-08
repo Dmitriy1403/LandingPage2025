@@ -62,12 +62,12 @@ const Create = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded shadow mt-8">
-      <h1 className="text-2xl font-bold mb-6">Добавить спикера</h1>
+      <h1 className="text-2xl font-bold mb-6">Add Speaker</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Имя <span className="text-red-500">*</span>
+            Name <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -81,7 +81,7 @@ const Create = () => {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Название (title)
+            Title (title)
           </label>
           <input
             type="text"
@@ -160,7 +160,7 @@ const Create = () => {
        
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Изображение
+            Image
           </label>
           <input
             type="file"
