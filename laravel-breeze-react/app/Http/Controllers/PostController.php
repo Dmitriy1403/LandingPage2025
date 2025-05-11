@@ -84,7 +84,7 @@ class PostController extends Controller
         // Создаём запись поста
         $post = Post::create($validated);
 
-        // Обрабатываем и сохраняем файлы в директорию public/posts
+    
         if ($images) {
             foreach ($images as $image) {
                 $destinationPath = public_path('img/posts');
@@ -159,7 +159,7 @@ class PostController extends Controller
         'delete_images.*'   => 'integer|exists:post_images,id',
     ]);
 
-    // Обновляем поля
+    
     $post->fill([
         'title'        => $validated['title'],
         'description'  => $validated['description'],
@@ -169,7 +169,7 @@ class PostController extends Controller
             : null,
     ]);
 
-    // Фоновое изображение
+    
     if ($request->hasFile('background_image')) {
         if ($post->background_image) {
             @unlink(public_path($post->background_image));
@@ -182,7 +182,7 @@ class PostController extends Controller
 
     $post->save();
 
-    // Удаляем отмеченные старые картинки
+   
     if ($request->filled('delete_images')) {
         foreach ($request->input('delete_images') as $imgId) {
             $img = PostImage::find($imgId);
@@ -193,7 +193,7 @@ class PostController extends Controller
         }
     }
 
-    // Сохраняем новые картинки
+    
     if ($request->hasFile('images')) {
         foreach ($request->file('images') as $image) {
             $name = time().'_'.$image->getClientOriginalName();
@@ -205,14 +205,14 @@ class PostController extends Controller
         }
     }
 
-    // ← теперь редирект всегда отработает
+   
     return redirect()
         ->route('posts.index')
         ->with('success', 'Пост успешно обновлен.');
 }
 
 
-// в PostController
+
 public function toggleLike(Post $post)
 {
     $user = auth()->user();

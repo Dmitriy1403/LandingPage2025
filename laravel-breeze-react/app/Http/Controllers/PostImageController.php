@@ -62,6 +62,6 @@ class PostImageController extends Controller
         @unlink(public_path($image->image_path));
         $image->delete();
     
-        return response()->noContent(); // 204
+        return response()->noContent();
     }
 }

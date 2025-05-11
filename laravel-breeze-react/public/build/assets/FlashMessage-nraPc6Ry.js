@@ -1,5 +1,0 @@
-import{K as p,j as o}from"./app-BoCm3Igx.js";var i={exports:{}};/*!
-	Copyright (c) 2018 Jed Watson.
-	Licensed under the MIT License (MIT), see
-	http://jedwatson.github.io/classnames
-*/var u;function l(){return u||(u=1,function(s){(function(){var c={}.hasOwnProperty;function n(){for(var r="",e=0;e<arguments.length;e++){var t=arguments[e];t&&(r=a(r,f(t)))}return r}function f(r){if(typeof r=="string"||typeof r=="number")return r;if(typeof r!="object")return"";if(Array.isArray(r))return n.apply(null,r);if(r.toString!==Object.prototype.toString&&!r.toString.toString().includes("[native code]"))return r.toString();var e="";for(var t in r)c.call(r,t)&&r[t]&&(e=a(e,t));return e}function a(r,e){return e?r?r+" "+e:r+e:r}s.exports?(n.default=n,s.exports=n):window.classNames=n})()}(i)),i.exports}function m(){const{flash:s}=p().props;return o.jsxs(o.Fragment,{children:[s.success&&o.jsx("div",{className:"bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4",children:s.success}),s.error&&o.jsx("div",{className:"bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4",children:s.error})]})}export{m as F,l as r};

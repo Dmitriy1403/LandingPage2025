@@ -189,14 +189,14 @@ export default function ScheduleEditor() {
 
 
   const deleteDay = (id) => {
-    if (!confirm('Вы уверены, что хотите удалить этот день?')) {
+    if (!confirm('Are you sure you want to delete this day?')) {
       return;
 
 
     }
     axios.delete(route('events.deleteDay', id)).then(() => location.reload()).catch((error) => {
       console.error('Error deleting day', error);
-      alert('Произошла ошибка при удалении дня')
+      alert('An error occurred while deleting the day')
     })
 
 
@@ -245,7 +245,7 @@ export default function ScheduleEditor() {
           <h2 className="text-xl font-semibold mb-4">Add new day</h2>
           <input
             type="text"
-            placeholder="Название дня"
+            placeholder="Name of the day"
             value={dayData.title}
             onChange={(e) => setDayData('title', e.target.value)}
             className="w-full px-4 py-2 border rounded mb-4"
@@ -276,7 +276,7 @@ export default function ScheduleEditor() {
           </select>
           <input
             type="text"
-            placeholder="Название мероприятия"
+            placeholder="Event Title"
             value={scheduleData.title}
             onChange={(e) => setScheduleData('title', e.target.value)}
             className="w-full px-4 py-2 border rounded mb-4"
@@ -311,13 +311,13 @@ export default function ScheduleEditor() {
 
           <input
             type="text"
-            placeholder="Место проведения"
+            placeholder="Venue"
             value={scheduleData.location}
             onChange={(e) => setScheduleData('location', e.target.value)}
             className="w-full px-4 py-2 border rounded mb-4"
           />
           <textarea
-            placeholder="Описание мероприятия"
+            placeholder="Description of the event"
             value={scheduleData.description}
             onChange={(e) => setScheduleData('description', e.target.value)}
             className="w-full px-4 py-2 border rounded mb-4"
@@ -461,7 +461,7 @@ export default function ScheduleEditor() {
                             className="w-full md:w-1/4 px-4 py-2 border rounded"
                           />
 
-                          <label className="block font-semibold mb-2">Выберите спикеров</label>
+                          <label className="block font-semibold mb-2">Select speakers</label>
                           <select
                             multiple
                             value={editScheduleData.speakers}

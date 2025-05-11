@@ -13,16 +13,14 @@ class SpeakerController extends Controller
      */
     public function index()
     {
-        // передаём данные в Inertia страницу
+      
         $speakers = Speaker::all();
         return Inertia::render('Speakers/Index', [
             'speakers' => $speakers
         ]);
     }
 
-    /**
-     * Показывает форму для создания нового спикера.
-     */
+   
     public function create()
     {
         return Inertia::render('Speakers/Create');
@@ -73,9 +71,7 @@ class SpeakerController extends Controller
         ]);
     }
 
-    /**
-     * Обновляет данные спикера.
-     */
+  
     public function update(Request $request, Speaker $speaker)
     {
 

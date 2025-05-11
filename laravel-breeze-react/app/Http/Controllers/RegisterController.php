@@ -89,35 +89,20 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         
-       $validated =Validator::make($request->all(),[
-        'groupName'=> 'required|string|unique:registration,groupName|max:255',
-        'participantsNumber'=>'required|int|max:11',
-        'contactPerson'=> 'required|string|max:255',
-
-        'email'=> 'required|string|unique:registration,email|max:255',
-        'phone'=> 'required|string|max:20',
-        'comments'=> 'nullable|string|max:1000',
-        'ticket_id' => 'required|exists:ticket_pricing,id',
-
-           
-       ]);
-
-       if($validated->fails()){
-        return response()->json([
-            'status' => false,
-            'message' => 'Validation error',
-            'errors' => $validated->errors()
-        ], 422);
-
-       }
-           
-        
-        Register::create($request->all());
-       
-         
-                 
-        
-        return redirect('/')->with('success','Register successfully');
+        $validated = $request->validate([
+            'groupName'          => 'required|string|unique:registration,groupName|max:255',
+            'participantsNumber' => 'required|integer|max:11',
+            'contactPerson'      => 'required|string|max:255',
+            'email'              => 'required|email|unique:registration,email|max:255',
+            'phone'              => 'required|string|max:20',
+            'comments'           => 'nullable|string|max:1000',
+            'ticket_id'          => 'required|exists:ticket_pricing,id',
+        ]);
+    
+        Register::create($validated);
+    
+        // Redirect — Inertia увидит редирект и подтянет flash.success
+        return redirect('/')->with('success', 'Register successfully');
 
     }
 

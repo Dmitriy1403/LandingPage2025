@@ -11,7 +11,7 @@ import FlashMessage from "./FlashMessage";
 
 import Sidebar from "./Sidebar";
 export default function ParticipantEvent({ participants_event, ticket_sum, totalParticipants,ticketSales,postLikeStats }) {
-  // Инициализируем состояние списком участников из participants_event.data
+
   
 
   
@@ -367,7 +367,7 @@ export default function ParticipantEvent({ participants_event, ticket_sum, total
               </tr>
             );
           } else {
-            // Обычная (не редактируемая) строка
+          
             return (
               <tr
                 key={participant.id}

@@ -36,7 +36,7 @@ class CommentController extends Controller
     
         return redirect()
             ->route('posts.show', $post->id)
-            ->with('success', 'Ваш комментарий отправлен на модерацию.');
+            ->with('success', 'Your comment has been sent for moderation.');
 
     
         
@@ -65,13 +65,13 @@ class CommentController extends Controller
 
         $comment->update(['is_approved' => $validated['is_approved']]);
 
-        return back()->with('success', 'Статус комментария обновлён.');
+        return back()->with('success', 'Comment status updated.');
     }
 
 
     public function destroy(Comment $comment)
     {
         $comment->delete();
-        return back()->with('success', 'Комментарий удалён.');
+        return back()->with('success', 'Comment removed.');
     }
 }

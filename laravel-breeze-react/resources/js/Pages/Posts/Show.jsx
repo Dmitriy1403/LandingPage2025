@@ -46,13 +46,13 @@ export default function Show() {
       
       sessionStorage.setItem(`commented_${post.id}`, 'true');
             setSubmitted(true);
-            setLocalSuccess('Ваш комментарий отправлен на модерацию.');
+            setLocalSuccess('Your comment has been sent for moderation.');
     } catch (err) {
       if (err.response?.status === 422) {
         setErrors(err.response.data.errors || {});
       } else {
         console.error(err);
-        alert('Ошибка при отправке комментария');
+        alert('Error sending comment');
       }
     } finally {
       setSubmitting(false);

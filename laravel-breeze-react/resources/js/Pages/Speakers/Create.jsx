@@ -190,7 +190,7 @@ const Create = () => {
             href="/speakers"
             className="text-gray-600 hover:text-gray-800 underline"
           >
-            Назад к списку
+            Back to List
           </Link>
         </div>
       </form>

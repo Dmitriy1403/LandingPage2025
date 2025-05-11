@@ -105,7 +105,7 @@ const Edit = () => {
       
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Имя <span className="text-red-500">*</span>
+            Name <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -121,7 +121,7 @@ const Edit = () => {
       
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Название (title)
+            Title (title)
           </label>
           <input
             type="text"

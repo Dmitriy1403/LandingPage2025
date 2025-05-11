@@ -3,17 +3,17 @@ import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 
 export default function AboutSection({ about_section }) {
-  // 1) Описываем контейнер для staggered-анимации
+
   const container = {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.3,    // задержка между появлением детей
+        staggerChildren: 0.3,    
       },
     },
   };
 
-  // 2) Настраиваем саму анимацию для каждого элемента
+
   const item = {
     hidden: { opacity: 0, y: 50 },
     visible: {
