@@ -12,7 +12,7 @@ use Illuminate\Support\Arr;
 class EventDayController extends Controller
 {
     public function index() {
-        $event_days = EventDay::with('schedules.speakers')->orderBy('event_date')->get();
+        $event_days = EventDay::with('schedules.speakers')->orderBy('event_date','asc')->get();
         
         return inertia('Event', ['event_days' => $event_days]);
     }
