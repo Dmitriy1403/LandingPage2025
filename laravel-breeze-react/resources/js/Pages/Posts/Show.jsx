@@ -22,7 +22,7 @@ export default function Show() {
   const [newComment, setNewComment] = useState('');
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
-  // Локальный флаг отправки: подгружается из localStorage
+
   const [submitted, setSubmitted] = useState(() => {
     try {
       return sessionStorage.getItem(`commented_${post.id}`) === 'true';
@@ -72,18 +72,18 @@ export default function Show() {
       
   const toggleLike = async () => {
     if (!auth.user) {
-      // например, редирект на логин
+   
       return Inertia.visit('/login');
     }
     setToggling(true);
     try {
       const { data } = await axios.post(route('posts.like', post.id));
-      // ожидаем { action: 'liked'|'unliked', likes_count: number }
+    
       setLiked(data.action === 'liked');
       setCount(data.likes_count);
     } catch (e) {
       console.error(e);
-      // можно показать уведомление
+    
     } finally {
       setToggling(false);
     }

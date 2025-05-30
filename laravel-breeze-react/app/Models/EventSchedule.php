@@ -11,7 +11,7 @@ class EventSchedule extends Model
     protected $fillable = ['event_day_id', 'title', 'image','start_time', 'end_time', 'location','description'];
 
     public function eventDay() {
-        return $this->belongsTo(EventDay::class, 'event_day_id');
+        return $this->belongsTo(EventDay::class, 'event_day_id')->orderBy('event_date','asc');
     }
 
     public function speakers()

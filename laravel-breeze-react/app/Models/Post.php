@@ -39,7 +39,7 @@ class Post extends Model
     // Связь с комментариями
     public function comments()
     {
-        return $this->hasMany(Comment::class)->where('is_approved', true);
+        return $this->hasMany(Comment::class)->where('is_approved', true)->orderBy('created_at','desc');
     }
 
     
